@@ -5,8 +5,10 @@ Feature: Main Testing Page
   Scenario: User can open market tab and filter by developers option
     # Enter steps here
   Given Open the main page
-#    When Log in to the page
-#    When Click on 'market' on the left side menu
-#    Then Verify the right page opens
-#    When Click on Developers filter at the top of the page
-#    Then Verify all cards have the license tag
+    When Enter username
+    And Type password
+    And Log in to the page
+  When Click on 'market' on the left side menu
+  Then Verify the right page opens
+  When Click on Developers filter at the top of the page
+  Then Verify all cards have the license tag
