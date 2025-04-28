@@ -1,21 +1,39 @@
 from selenium import webdriver
+from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.chrome.service import Service
-from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.firefox.webdriver import WebDriver
+from webdriver_manager.firefox import GeckoDriverManager
 
+#from webdriver_manager.chrome import ChromeDriverManager
 from app.Application import Application
+#from sample_script import driver_path
 
 
 def browser_init(context):
     """
     :param context: Behave context
     """
-    driver_path = ChromeDriverManager().install()
+
+# Headless
+#    driver_path = ChromeDriverManager().install()
+#    service = Service(driver_path)
+#    context.driver = webdriver.Chrome(service=service)
+
+# Firefox
+    driver_path = GeckoDriverManager().install()
     service = Service(driver_path)
-    context.driver = webdriver.Chrome(service=service)
+    context.driver = webdriver.Firefox(service=service)
+#    options = get_default_chrome_options()
+#    driver = webdriver.Remote(command_executor=server, options=options)
 
+# Google Chrome
+#    driver_path = ChromeDriverManager().install()
+#    service = Service(driver_path)
+#    context.driver = webdriver.Chrome(service=service)
 
+#--------------------------------------------------------------
 #    context.driver.maximize_window()
-    context.driver.implicitly_wait(4)
+#    context.driver.implicitly_wait(4)
     context.app = Application(context.driver)
 
 def before_scenario(context, scenario):
