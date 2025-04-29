@@ -3,7 +3,7 @@ from selenium.webdriver.firefox.service import Service
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.firefox.webdriver import WebDriver
 from webdriver_manager.firefox import GeckoDriverManager
-
+from selenium.webdriver.chromium.options import ChromiumOptions
 #from webdriver_manager.chrome import ChromeDriverManager
 from app.Application import Application
 #from sample_script import driver_path
@@ -16,13 +16,17 @@ def browser_init(context):
 
 # Headless
 #    driver_path = ChromeDriverManager().install()
-#    service = Service(driver_path)
-#    context.driver = webdriver.Chrome(service=service)
+#    service = Service(driver_path='./chromedriver.exe')
+    options = webdriver.ChromeOptions()
+#    options.binary_location = '/usr/bin/google-chrome-unstable'
+    options.add_argument('headless')
+    context.driver = webdriver.ChromeOptions(chrome_options=options)
+
 
 # Firefox
-    driver_path = GeckoDriverManager().install()
-    service = Service(driver_path)
-    context.driver = webdriver.Firefox(service=service)
+#   driver_path = GeckoDriverManager().install()
+#   service = Service(driver_path)
+#   context.driver = webdriver.Firefox(service=service)
 #    options = get_default_chrome_options()
 #    driver = webdriver.Remote(command_executor=server, options=options)
 
@@ -34,7 +38,7 @@ def browser_init(context):
 #--------------------------------------------------------------
 #    context.driver.maximize_window()
 #    context.driver.implicitly_wait(4)
-    context.app = Application(context.driver)
+#    context.app = Application(context.driver)
 
 def before_scenario(context, scenario):
     print('\nStarted scenario: ', scenario.name)
