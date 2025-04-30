@@ -12,13 +12,17 @@ class MarketPage(Page):
     LIC_BANNER = (By.XPATH, "//div[@class='license-block']")
 
     def check_market_page(self):
-        self.find_element(*self.HDR_TEXT)
+        actual_text = self.find_element(*self.HDR_TEXT).text
+        assert 'Market' in actual_text, f'Error, Market Page not found'
+#       old locator = self.find_element(*self.HDR_TEXT)
 
     def developer_filter(self):
         self.find_element(*self.DEV_TEXT)
 
     def license_tag(self):
-        self.find_elements(*self.LIC_BANNER)
+        actual_text = self.find_element(*self.LIC_BANNER).text
+        assert 'License' in actual_text, f'Error, Banners not found on page'
+#       old locator = self.find_elements(*self.LIC_BANNER)
 
 
 #//div[@wized='marketTagDevelopers']

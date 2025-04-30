@@ -1,12 +1,12 @@
-from selenium import webdriver
 from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.chrome.service import Service
-from selenium.webdriver.firefox.webdriver import WebDriver
-from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.chromium.options import ChromiumOptions
-#from webdriver_manager.chrome import ChromeDriverManager
+#from selenium.webdriver.chrome.service import Service
+#from selenium.webdriver.firefox.webdriver import WebDriver
+#from webdriver_manager.firefox import GeckoDriverManager
+#from selenium.webdriver.chromium.options import ChromiumOptions
 from app.Application import Application
-#from sample_script import driver_path
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 def browser_init(context):
@@ -14,13 +14,19 @@ def browser_init(context):
     :param context: Behave context
     """
 
+# Google Chrome
+    driver_path = ChromeDriverManager().install()
+    service = Service(driver_path)
+    context.driver = webdriver.Chrome(service=service)
+
+
 # Headless
 #    driver_path = ChromeDriverManager().install()
 #    service = Service(driver_path='./chromedriver.exe')
-    options = webdriver.ChromeOptions()
+#    options = webdriver.ChromeOptions()
 #    options.binary_location = '/usr/bin/google-chrome-unstable'
-    options.add_argument('headless')
-    context.driver = webdriver.ChromeOptions(chrome_options=options)
+#    options.add_argument('headless')
+#    context.driver = webdriver.ChromeOptions(chrome_options=options)
 
 
 # Firefox
@@ -30,15 +36,15 @@ def browser_init(context):
 #    options = get_default_chrome_options()
 #    driver = webdriver.Remote(command_executor=server, options=options)
 
-# Google Chrome
-#    driver_path = ChromeDriverManager().install()
-#    service = Service(driver_path)
-#    context.driver = webdriver.Chrome(service=service)
+
 
 #--------------------------------------------------------------
+
 #    context.driver.maximize_window()
-#    context.driver.implicitly_wait(4)
-#    context.app = Application(context.driver)
+    context.driver.implicitly_wait(5)
+    context.app = Application(context.driver)
+
+#--------------------------------------------------------------
 
 def before_scenario(context, scenario):
     print('\nStarted scenario: ', scenario.name)
