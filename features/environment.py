@@ -2,10 +2,13 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from app.Application import Application
-from webdriver_manager.firefox import GeckoDriverManager
-from selenium.webdriver.chrome.options import Options
-#from selenium.webdriver.firefox.options import Options
+# from webdriver_manager.firefox import GeckoDriverManager
+# from selenium.webdriver.chrome.options import Options
+# from selenium.webdriver.firefox.options import Options
+# from allure_behave import
 
+# Commands for Allure
+# behave -f allure_behave.formatter:AllureFormatter -o test_results/ features/tests/<>feature
 
 def browser_init(context, scenario_name):
     """
@@ -13,9 +16,9 @@ def browser_init(context, scenario_name):
     """
 
     # Google Chrome
-    # driver_path = ChromeDriverManager().install()
-    # service = Service(driver_path)
-    # context.driver = webdriver.Chrome(service=service)
+    driver_path = ChromeDriverManager().install()
+    service = Service(driver_path)
+    context.driver = webdriver.Chrome(service=service)
 
     # Headless
     #    driver_path = ChromeDriverManager().install()
@@ -45,19 +48,19 @@ def browser_init(context, scenario_name):
 
     ### BROWSERSTACK CONFIG ###
     ## Register for BrowserStack, then grab it from https://www.browserstack.com/accounts/settings
-    bs_user = 'felixlubin_8b3pgO'
-    bs_key = '1mE9qLyKq5qQ36voYGB9'
-    url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
-
-    options = Options()
-    bstack_options = {
-        "os": "OS X",
-        "osVersion": "Sonoma",
-        'browserName': 'chrome',
-        'sessionName': scenario_name,
-    }
-    options.set_capability('bstack:options', bstack_options)
-    context.driver = webdriver.Remote(command_executor=url, options=options)
+    # bs_user = 'felixlubin_8b3pgO'
+    # bs_key = '1mE9qLyKq5qQ36voYGB9'
+    # url = f'http://{bs_user}:{bs_key}@hub-cloud.browserstack.com/wd/hub'
+    #
+    # options = Options()
+    # bstack_options = {
+    #     "os": "OS X",
+    #     "osVersion": "Sonoma",
+    #     'browserName': 'chrome',
+    #     'sessionName': scenario_name,
+    # }
+    # options.set_capability('bstack:options', bstack_options)
+    # context.driver = webdriver.Remote(command_executor=url, options=options)
 
 #--------------------------------------------------------------
 

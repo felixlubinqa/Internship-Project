@@ -1,6 +1,7 @@
 from os import waitpid
 from time import sleep
 from behave import Given, When, Then
+from app.Application import Application
 
 
 @Given ('Open the main page')
