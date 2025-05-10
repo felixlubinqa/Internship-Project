@@ -21,7 +21,7 @@ def password_entry(context):
 @When ("Log in to the page")
 def log_in(context):
     context.app.reelly_main_page.log_in()
-    sleep(3)
+#    sleep(10)
 
 @When ("Click on 'market' on the left side menu")
 def open_market(context):
